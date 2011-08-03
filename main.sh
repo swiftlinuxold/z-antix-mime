@@ -5,22 +5,24 @@
 if [ ! $( id -u ) -eq 0 ]; then
 	echo "You must be root to run this script."
 	echo "Please enter su before running this script again."
-	exit
+	exit 2
 fi
 
-USERNAME=$(logname)
-IS_CHROOT=0
+IS_CHROOT=0 # changed to 1 if and only if in chroot mode
+USERNAME=""
+DIR_DEVELOP=""
 
 # The remastering process uses chroot mode.
 # Check to see if this script is operating in chroot mode.
-# If /home/$USERNAME exists, then we are not in chroot mode.
-if [ -d "/home/$USERNAME" ]; then
-	IS_CHROOT=0 # not in chroot mode
-	DIR_DEVELOP=/home/$USERNAME/develop 
-else
+# /srv directory only exists in chroot mode
+if [-d "/srv"]; then
 	IS_CHROOT=1 # in chroot mode
 	DIR_DEVELOP=/usr/local/bin/develop 
+else
+	USERNAME=$(logname) # not in chroot mode
+	DIR_DEVELOP=/home/$USERNAME/develop 
 fi
+
 
 echo "Changing Bittorrent file association"
 # If /home/$USERNAME exists, change the file association in this directory.
@@ -40,3 +42,5 @@ if [ $IS_CHROOT -eq 0 ]; then
 else
 	chown demo:users /etc/skel/.config/rox.sourceforge.net/MIME-types/application_x-bittorrent
 fi
+
+exit 0

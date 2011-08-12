@@ -1,3 +1,5 @@
-Opening /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_x-bittorrent should open a Transmission window.
+Opening /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_x-bittorrent should 
+open a Transmission window.
 
-Opening /etc/skel/.config/rox.sourceforge.net/MIME-types/application_x-bittorrent should open a Transmission window.
+Opening /etc/skel/.config/rox.sourceforge.net/MIME-types/application_x-bittorrent should open a 
+Transmission window.
